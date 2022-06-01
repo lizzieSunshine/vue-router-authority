@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>art-tempalte</title>
+  <!--<link rel="stylesheet" href="../../static/css/common.css" />-->
+  <link rel="stylesheet" href="css/common.css" />
+  <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <script>
+    // compile the template
+    var template = Handlebars.compile("Handlebars <b>{{doesWhat}}</b>");
+    // execute the compiled template and print the output to the console
+    console.log(template({ doesWhat: "rocks!" }));
+  </script>
+
+  <script>
+    let app = new Vue({
+      el: '#app',
+      template: "vue"
+    });
+  </script>
+</head>
+
+<body>
+  <div id="app"></div>
+  <h1>Router Authorize</h1>
+
+  <h1>表格</h1>
+
+  <!--<div>用户名：<%= username %></div>-->
+  <!--<div>好友个数：<%= friends.number %></div>-->
+  <!--<div>好友个数：<%= friends['number'] %></div>-->
+  <!--<div>好友个数范围：<%= friends.number > 0 ? '有好友' : '无好友' %></div>-->
+  <!--<div>1 || 0：<%= 1 || 0 %></div>-->
+  <!--<div>1 + 2：<%= 1 + 2 %></div>-->
+
+  <div>用户名：{{username}}</div>
+  <div>好友个数：{{friends.number}}</div>
+  <div>好友个数：{{friends['number']}}</div>
+  <div>好友个数范围：{{friends.number > 0 ? '有好友' : '无好友'}}</div>
+  <div>1 || 0：{{1 || 0 }}</div>
+  <div>1 + 2：{{1 + 2}}></div>
+
+  <h1>原文输出</h1>
+  超链接：{{@ link }}
+  超链接：<%- link %>
+
+</body>
+
+</html>

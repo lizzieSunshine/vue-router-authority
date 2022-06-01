@@ -1,0 +1,62 @@
+.routes-page {
+  padding-top: 20px;
+
+  .oper-group {
+    margin-bottom: 20px;
+  }
+
+  .alert {
+    margin: 20px 0;
+  }
+}
+
+.table {
+  ::v-deep a {
+    color: red;
+  }
+}
+
+.table {
+  .row-root {
+    // background: #ddebfa;
+  
+    .route-name {
+      font-size: 15px;
+      font-weight: 700;
+    
+      &.is-root {
+        color: #326ee2;
+      }
+    }
+  }
+
+  .el-icon-success {
+    margin-right: 4px;
+    color: #67C23A;
+  }
+
+  // .oper-btn {
+  //   font-size: 16px;
+  // }
+}
+
+
+
+
+
+.authority-btn {
+  color: #E6A23C;
+}
+
+.delete-btn {
+  color: #F56C6C;
+}
+
+.auth-page {
+  .alert-info {
+    a {
+      color: #409eff;
+      text-decoration: none;
+    }
+  }
+}

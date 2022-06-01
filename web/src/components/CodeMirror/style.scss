@@ -1,0 +1,50 @@
+.code-mirror-wrapper, 
+.vue-codemirror {
+  height: 100%;
+}
+.code-mirror  .CodeMirror{
+  height: calc(100%);
+  font-family: 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.code-mirror {
+  .CodeMirror-code {
+    font-size: 14px;
+  }
+}
+
+.code-mirror  .cm-s-darcula span.cm-string.cm-property {
+  color: #82a599;
+}
+.code-mirror  .cm-s-darcula span.cm-number {
+  color: #88c1ec;
+}
+.code-mirror  .cm-s-darcula span.cm-string {
+  color: #f1db8c;
+}
+
+.code-mirror-wrapper  .el-icon-loading {
+  color: #eee;
+  font-size: 24px;
+}
+
+.code-mirror-wrapper .el-loading-text {
+  font-size: 16px;
+  color: #eee;
+}
+
+/* 主题 */
+
+/* ambiance-mobile */
+.code-mirror .cm-property {
+  color: #ca200f;
+}
+.code-mirror .cm-number {
+  color: #51a275;
+}
+.code-mirror .cm-string {
+  color: #204c9c;
+}
+

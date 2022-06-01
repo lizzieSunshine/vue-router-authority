@@ -1,0 +1,21 @@
+.settings-page {
+  padding-top: 20px;
+
+  .section-wrapper {
+    padding-left: 10px;
+    border-left: solid $primary 4px;
+    
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      color: $primary;
+      font-size: 18px;
+    }
+
+    .tag .label {
+      color: #333;
+    }
+  }
+}

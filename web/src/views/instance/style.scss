@@ -1,0 +1,92 @@
+.instance-page {
+  padding-top: 20px;
+  .el-checkbox {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .cm-s-darcula.CodeMirror {
+    padding: 10px;
+    height: auto;
+    line-height: 20px;
+  }
+
+  .oper-group {
+    display: flex;
+    justify-content: space-between;
+
+    .save-path {
+      color: #409eff;
+    }
+  }
+
+  // quick nav
+  .quick-nav {
+    position: fixed;
+    top: 50vh;
+    right: 20px;
+    z-index: 1;
+    padding: 10px;
+    min-width: 120px;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0px 0px 8px rgba(128, 128, 128, 0.4);
+    transform: translateY(-50%);
+
+    .quick-nav-item {
+      padding: 4px 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .success-icon {
+      color: #67C23A;
+    }
+
+    .info-icon {
+      color: #bbb;
+    }
+  }
+
+  .check-box-wrapper {
+    margin-top: 20px;
+    padding: 20px;
+    border-left: solid 4px #fff;
+
+    &.active {
+      border-left: solid 4px #409eff;
+    }
+
+    &:nth-child(2n) {
+      background: #f4f4f4;
+    }
+
+    &:hover {
+      background: #f3f9ff;
+      box-shadow: 0 0 8px rgba(128, 128, 128, .1);
+    }
+    
+
+    .title {
+      margin-bottom: 4px;
+      color: #072749;
+      font-size: 18px;
+    }
+
+    .description {
+      margin-bottom: 10px;
+      color: #999;
+      font-size: 14px;
+    }
+
+    .code-wrapper {
+      position: relative;
+
+      .reset {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    }
+  }
+}

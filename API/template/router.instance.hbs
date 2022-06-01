@@ -1,0 +1,49 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+{{!-- import routes from "./_larstore/_routes"; --}}
+import routes from "../_routes/_routes";
+import { Message } from 'element-ui';
+
+Vue.use(Router)
+
+{{!-- failuresRepeat --}}
+{{#if failuresRepeat}}
+// 路由故障
+{{{failuresRepeat}}}
+{{/if}} 
+
+{{!-- scroll --}}
+{{#if scroll}}
+// scroll行为
+{{{scroll}}}
+{{/if}} 
+
+
+const router =  new Router({
+  {{#if mode}}
+  mode: '{{mode}}',
+  {{/if}}
+  {{#if base}}
+  base: '{{base}}',
+  {{/if}}
+  routes: [
+    {{#each list}}
+    {
+      path: '/{{name}}',
+      name: '{{name}}',
+      component: () => import('./views/{{file}}')
+    },
+    {{/each}}
+  ],
+  {{#if scroll}}
+  scrollBehavior
+  {{/if}}
+});
+
+{{!-- format router's component --}}
+{{{formatComponent}}}
+
+{{!-- before each --}}
+{{{beforeEach}}}
+
+export default router;

@@ -1,2 +1,2 @@
 # vue-router-authority
-authorize vue-router
+vue路由授权

@@ -1,0 +1,21 @@
+{
+  "name": "generaterouter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lizzie",
+  "license": "ISC",
+  "dependencies": {
+    "handlebars": "^4.7.7",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.1.1",
+    "koa-send": "^5.0.1",
+    "koa-static": "^5.0.0",
+    "koa2-cors": "^2.0.6",
+    "uuid": "^8.3.2"
+  }
+}
