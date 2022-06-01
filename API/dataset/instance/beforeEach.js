@@ -145,7 +145,7 @@ router.beforeEach((to, from, next) => {
 
   // token有效性
   const noCheckRoute = [];
-  const checkedValid = beforeEachCfg.checkedAuthInterceptor(role, noCheckRoute);
+  const checkedValid = beforeEachCfg.checkedAuthInterceptor(to, noCheckRoute);
   console.log(checkedValid);
   // checkedValid ? next() : CAS.checkToken(false) ? next() : CAS.gotoLogin();
 

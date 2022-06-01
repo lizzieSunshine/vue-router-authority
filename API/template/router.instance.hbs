@@ -24,7 +24,7 @@ const router =  new Router({
   mode: '{{mode}}',
   {{/if}}
   {{#if base}}
-  base: '{{base}}',
+  base: {{instanceFormatBase base}},
   {{/if}}
   routes: [
     {{#each list}}

@@ -1,6 +1,18 @@
 const fs = require("fs");
 const handlebars = require('handlebars');
 
+// router.base系统参数处理
+const instanceFormatBase = (baseVal) => {
+  return baseVal.indexOf('process.env') === 0
+	? baseVal
+	: new handlebars.SafeString(`'${baseVal}'`);
+};
+
+// 注册Helper
+handlebars.registerHelper({
+  instanceFormatBase
+});
+
 /**
  * 编译模板文件
  * @parm {object} meta 数据定义
