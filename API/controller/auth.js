@@ -70,7 +70,7 @@ module.exports.get = async ctx => {
 
     // 实例文件
     const routesPath = path.join(routesDirPath, routes);
-    exsitAndMK(routesPath, true, "");
+    exsitAndMK(routesPath, true, "export default []");
 
     // 读文件
     let data = await readFile(routesPath, "utf-8");
