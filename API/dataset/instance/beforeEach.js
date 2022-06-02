@@ -98,6 +98,18 @@ const beforeEachCfg = {
 
     return auth.some(item => item === role);
   },
+  
+  /**
+   * 用户类型路由拦截
+   * @param {string} role 当前用户类型
+   * @param {Array} auth 可访问权限
+   */
+  userTypeInterceptor: (userType, auth) => {
+    // 没有授权项，默认为开放所有权限
+    if (auth.length === 0) return true;
+
+    return auth.some(item => item === userType);
+  },
 
   /**
    * 非指定路由不能访问拦截
@@ -119,11 +131,13 @@ const beforeEachCfg = {
 // 重定向path
 const redirectPath = "/index";
 
-// 用户角色
-const role = "2";
-
 // 路由守卫
 router.beforeEach((to, from, next) => {
+  // 用户角色
+  const role = "";
+  // 用户类型
+  const userType = "";
+  
   const { meta = {} } = to;
   const { auth = [] } = meta || {};
 
@@ -142,10 +156,14 @@ router.beforeEach((to, from, next) => {
   // 授权合法性
   const roleValid = beforeEachCfg.roleInterceptor(role, auth);
   if (!roleValid) return Message.warning('角色暂无权限');
+  
+  // 用户类型授权合法性
+  const userTypeValid = beforeEachCfg.userTypeInterceptor(userType, _userType);
+  if (!userTypeValid) return Message.warning('用户暂无权限');
 
   // token有效性
   const noCheckRoute = [];
-  const checkedValid = beforeEachCfg.checkedAuthInterceptor(to, noCheckRoute);
+  const checkedValid = beforeEachCfg.checkedAuthInterceptor(role, noCheckRoute);
   console.log(checkedValid);
   // checkedValid ? next() : CAS.checkToken(false) ? next() : CAS.gotoLogin();
 

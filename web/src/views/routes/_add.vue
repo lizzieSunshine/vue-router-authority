@@ -16,28 +16,68 @@
       label-width="80px"
       label-position="top"
     >
-      <el-form-item label="path" prop="path">
-        <el-input v-model="form.path"></el-input>
-      </el-form-item>
-      <el-form-item label="name" prop="name">
-        <el-input v-model="form.name"></el-input>
-      </el-form-item>
-      <el-form-item label="component" prop="component">
-        <!-- <el-alert type="warning" :closable="false" style="margin-bottom: 10px">
-          <p>1. 如：views/home/index</p>
-          <p>2. 必须到详细到页面，且后缀不带.vue</p>
-        </el-alert> -->
-        <el-input v-model="form.component">
-          <template slot="prepend">@/</template>
-          <template slot="append">.vue</template>
-        </el-input>
-      </el-form-item>
-      <el-form-item label="redirect" prop="redirect">
-        <el-input v-model="form.redirect"></el-input>
-      </el-form-item>
-      <el-form-item label="分组" prop="group">
-        <el-input v-model="form.group"></el-input>
-      </el-form-item>
+      <el-row :gutter="20">
+        <!-- path -->
+        <el-col :span="12">
+          <el-form-item label="path" prop="path">
+            <el-input v-model="form.path"></el-input>
+          </el-form-item>
+        </el-col>
+        <!-- name -->
+        <el-col :span="12">
+          <el-form-item label="name" prop="name">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+        </el-col>
+        <!-- redirect -->
+        <el-col :span="12">
+          <el-form-item label="redirect" prop="redirect">
+            <el-input v-model="form.redirect"></el-input>
+          </el-form-item>
+        </el-col>
+        <!-- 中文名 -->
+        <el-col :span="12">
+          <el-form-item label="中文名（选填）" prop="_title">
+            <el-input v-model="form._title"></el-input>
+          </el-form-item>
+        </el-col>
+        <!-- component -->
+        <el-col :span="24">
+          <el-form-item label="component" prop="component">
+            <!-- <el-alert type="warning" :closable="false" style="margin-bottom: 10px">
+              <p>1. 如：views/home/index</p>
+              <p>2. 必须到详细到页面，且后缀不带.vue</p>
+            </el-alert> -->
+            <el-input v-model="form.component">
+              <template slot="prepend">@/</template>
+              <template slot="append">.vue</template>
+            </el-input>
+          </el-form-item>
+          <!--<el-form-item label="component" prop="component">-->
+            <!-- <el-alert type="warning" :closable="false" style="margin-bottom: 10px">
+              <p>1. 如：views/home/index</p>
+              <p>2. 必须到详细到页面，且后缀不带.vue</p>
+            </el-alert> -->
+            <!--<el-input v-model="form.component">-->
+              <!--<template slot="prepend">@/</template>-->
+              <!--<template slot="append">.vue</template>-->
+            <!--</el-input>-->
+          <!--</el-form-item>-->
+
+        </el-col>
+      </el-row>
+
+      <div class="hr"></div>
+
+      <el-row :gutter="20" v-if="false">
+        <!-- 分组 -->
+        <el-col :span="12">
+          <el-form-item label="分组" prop="group">
+            <el-input v-model="form.group"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+
       <el-form-item label="meta" prop="meta">
         <code-mirror :data="form.meta" @on-update="updateMeta" />
       </el-form-item>
@@ -79,6 +119,8 @@ export default {
         redirect: "",
         meta: "",
         group: "",
+
+        _title: ""
       },
       rules: {
         // name: {

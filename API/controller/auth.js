@@ -25,6 +25,19 @@ const getPath = (rootPath) => {
   return { dir, routesPath, cachePath };
 }
 
+// 标准路由
+const standardRoute = () => {
+  return {
+    path: "",
+    name: "",
+    component: "",
+    _title: "",
+    group: "",
+    _parentId: "",
+    id: ""
+  };
+};
+
 // 组装router.js
 const uploadFile = (routers) => {
   let content = routers.map(item => JSON.stringify(item)).join(",");
@@ -108,53 +121,11 @@ module.exports.get = async ctx => {
   }
 };
 
-// module.exports.get = async ctx => {
-//   // 目标文件物理路径
-//   const dirPath = ctx.request.query.path;
-
-//   if (!dirPath) {
-//     ctx.body = { code: -1, message: '参数缺失', data: [] };
-//   }
-
-//   // 写出路径
-//   const cachePath = path.join(__dirname, '../_cache');
-
-//   // 写出文件名
-//   const fileName = `_router_${timeStamp()}.js`;
-
-//   try {
-//     // 读
-//     let data = await readFile(dirPath, "utf-8");
-
-//     // 格式化
-//     data = data.replace('export default', 'module.exports = ');
-
-//     // 写
-//     await writeFile(path.join(cachePath, fileName), data);
-
-//     // 引入
-//     const result = require(path.join(cachePath, fileName));
-
-//     // 格式化component
-//     formatComponent(result);
-
-//     // 删除缓存
-//     fs.unlink(path.join(cachePath, fileName), err => {
-//       console.log(err);
-//     });
-
-//     ctx.body = { code: 0, message: '成功', data: result };
-//   } catch (e) {
-//     ctx.body = { code: 1, message: '失败', data: e.message };
-//   }
-// };
-
-
 // 新增
 module.exports.add = async (ctx) => {
-  const route = ctx.request.body.route;
-  const parentId = ctx.request.body.parentId;
-  const routers = ctx.request.body.routers;
+  const route = ctx.request.body.route; // 当前路由
+  const parentId = ctx.request.body.parentId; // 当前路由父级ID
+  const routers = ctx.request.body.routers; // 路由合集
 
   if (!route) {
     ctx.body = { code: 1, message: '路由缺失' };
@@ -192,9 +163,12 @@ module.exports.edit = async (ctx) => {
     ctx.body = { code: 1, message: 'id缺失' };
   }
 
+  const defaultRoute = standardRoute();
+
   filterRecursion(routers, id, (routeItem) => {
     Object.entries(route).forEach(([k, v]) => {
-      if (k in routeItem) {
+      // if (k in routeItem) {
+      if (k in defaultRoute) {
         (k !== 'id') && (routeItem[k] = v);
       } else {
         const metaObj = {};
@@ -250,6 +224,26 @@ module.exports.auth = async = ctx => {
   ctx.body = { code: 0, message: '成功', data: list };
 };
 
+// 用户类型授权
+module.exports.authUserType = async = ctx => {
+  const id = ctx.request.body.id;
+  const roles = ctx.request.body.roles;
+  const list = ctx.request.body.list;
+
+  if (!id) {
+    ctx.body = { code: 1, message: '缺失id' };
+    return;
+  }
+
+  filterRecursion(list, id, routeItem => {
+    routeItem['meta']
+      ? routeItem.meta['_userType'] = roles
+      : routeItem['meta'] = { _userType: roles };
+  });
+
+  ctx.body = { code: 0, message: '成功', data: list };
+};
+
 // from路由授权
 module.exports.authFromRoutes = async ctx => {
   const id = ctx.request.body.id;
@@ -273,7 +267,6 @@ module.exports.authFromRoutes = async ctx => {
 module.exports.saveRoutestoCache = async ctx => {
   // get routers
   const routers = ctx.request.body.list;
-  console.log(routers[1].children);
 
   // write files
   try {

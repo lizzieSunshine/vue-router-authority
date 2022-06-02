@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from "@/store";
 {{!-- import routes from "./_larstore/_routes"; --}}
 import routes from "../_routes/_routes";
 import { Message } from 'element-ui';
@@ -24,7 +25,7 @@ const router =  new Router({
   mode: '{{mode}}',
   {{/if}}
   {{#if base}}
-  base: {{instanceFormatBase base}},
+	base: {{instanceFormatBase base}},
   {{/if}}
   routes: [
     {{#each list}}

@@ -19,7 +19,7 @@
       :data="list"
       :border="true"
       :stripe="true"
-      size="mini"
+      size="small"
       row-key="id"
       default-expand-all
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
@@ -37,22 +37,35 @@
           >
         </template>
       </el-table-column>
+      <!-- path -->
       <el-table-column prop="path" label="path">
-        <!-- <template slot-scope="scope"> /{{ scope.row.path }} </template> -->
+         <template slot-scope="scope">
+           <span class="path">{{ scope.row.path }}</span>
+         </template>
       </el-table-column>
+      <!-- 中文名 -->
+      <el-table-column prop="_title" label="名称"></el-table-column>
       <!-- component -->
-      <el-table-column prop="group" label="分组"> </el-table-column>
+      <!-- <el-table-column prop="group" label="分组"> </el-table-column> -->
       <el-table-column prop="meta" label="meta">
         <template slot-scope="scope"> {{ scope.row.meta }} </template>
       </el-table-column>
       <el-table-column prop="auth" label="授权角色">
         <template slot-scope="scope">
-          <!-- <el-tag type="success" size="mini" v-if="scope.row.meta && scope.row.meta['auth']">已授权</el-tag> -->
           <i
             class="el-icon-success"
             v-if="scope.row.meta && scope.row.meta['auth']"
           ></i>
           {{ scope.row.meta && scope.row.meta["auth"] }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="auth" label="用户类型授权">
+        <template slot-scope="scope">
+          <i
+            class="el-icon-success"
+            v-if="scope.row.meta && scope.row.meta['_userType']"
+          ></i>
+          {{ scope.row.meta && scope.row.meta["_userType"] }}
         </template>
       </el-table-column>
       <!-- 前置路由 -->
@@ -71,6 +84,9 @@
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
                 <p @click="authorizeRole(scope.row)">角色授权</p>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <p @click="authorizeUserType(scope.row)">用户类型</p>
               </el-dropdown-item>
               <el-dropdown-item>
                 <p @click="authorizeJump(scope.row)">前置路由</p>
@@ -96,27 +112,23 @@
           </el-tooltip>
 
           <!-- 编辑 -->
-          <el-tooltip effect="dark" content="编辑" placement="top">
-            <el-button
-              type="text"
-              size="mini"
-              icon="el-icon-edit"
-              class="oper-btn"
-              @click="edit(scope.row)"
-            ></el-button>
-          </el-tooltip>
+          <el-button
+            type="text"
+            size="mini"
+            icon="el-icon-edit"
+            class="oper-btn"
+            @click="edit(scope.row)"
+          ></el-button>
 
           <!-- 删除 -->
-          <el-tooltip effect="dark" content="删除" placement="top">
-            <el-button
-              type="text"
-              size="mini"
-              icon="el-icon-remove"
-              class="oper-btn delete-btn"
-              :loading="savaLoding"
-              @click="deleteRow(scope.row)"
-            ></el-button>
-          </el-tooltip>
+          <el-button
+            type="text"
+            size="mini"
+            icon="el-icon-remove"
+            class="oper-btn delete-btn"
+            :loading="savaLoding"
+            @click="deleteRow(scope.row)"
+          ></el-button>
 
           <!-- 上移 -->
           <!-- <el-tooltip effect="dark" content="上移" placement="top">
@@ -141,6 +153,12 @@
       @on-update="updateRouters"
     ></authorize>
     <!-- 授权 -->
+    <authorize-user
+      ref="authorizeUser"
+      :list="list"
+      @on-update="updateRouters"
+    ></authorize-user>
+    <!-- 授权 -->
     <to ref="to" :list="list" @on-update="updateRouters"></to>
   </div>
 </template>
@@ -149,6 +167,7 @@
 import mixin from "@/mixins/mixin";
 import Add from "./_add.vue";
 import Authorize from "./_authorize.vue";
+import AuthorizeUerType from "./_authorizeUerType.vue";
 import To from "./_to.vue";
 
 export default {
@@ -156,6 +175,7 @@ export default {
   components: {
     add: Add,
     authorize: Authorize,
+    'authorize-user': AuthorizeUerType,
     to: To,
   },
   data() {
@@ -239,6 +259,11 @@ export default {
     // 角色授权
     authorizeRole(row) {
       this.$refs.authorize.show(row);
+    },
+
+    // 用户类型授权
+    authorizeUserType(row) {
+      this.$refs.authorizeUser.show(row);
     },
 
     // 前置路由授权

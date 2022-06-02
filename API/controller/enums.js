@@ -42,7 +42,7 @@ module.exports.get = async ctx => {
 
   // 枚举文件
   const enumsPath = path.join(enumsDirPath, enums);
-  exsitAndMK(enumsPath, true, '');
+  exsitAndMK(enumsPath, true, 'export default {}');
 
   try {
     let data = await readFile(enumsPath, "utf-8");

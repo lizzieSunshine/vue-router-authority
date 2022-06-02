@@ -12,6 +12,7 @@ router.post('/add', authController.add);
 router.post('/edit', authController.edit);
 router.post('/delete', authController.delete);
 router.post('/auth', authController.auth);
+router.post('/authUserType', authController.authUserType);
 router.post('/authFromRoutes', authController.authFromRoutes);
 router.post('/saveRoutestoCache', authController.saveRoutestoCache);
 router.post('/save', authController.save);

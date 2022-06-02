@@ -29,6 +29,12 @@ export default {
     method: "post"
   },
 
+  authUser: {
+    name: "authUser",
+    url: "/api/router/authUserType",
+    method: "post"
+  },
+
   authFromRoutes: {
     name: "authFromRoutes",
     url: "/api/router/authFromRoutes",
